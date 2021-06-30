@@ -6,13 +6,12 @@ function resizeImg($path, $newNameFile)
     define('HEIGHT', 150);
     define('DIRSAVE', 'res-images');
     define('QUALITY', 75);
-    $errors = [];
 
     if (!file_exists($path)) {
-        $errors = 'файл не существует';
+        throw new Exception('файл не существует');
     }
     if (!function_exists('exif_imagetype')) {
-        $errors = 'Не подключено расширение exif';
+        throw new Exception('Не подключено расширение exif');
     }
 
     // get type and create img desc
@@ -29,7 +28,7 @@ function resizeImg($path, $newNameFile)
 
         $img = imagecreatefromgif($path);
     } else {
-        $errors = 'Допустимые типы: .jpg .png .gif';
+        throw new Exception('Допустимые типы: .jpg .png .gif');
     }
 
     $img = resize($img);
@@ -55,7 +54,7 @@ function save($img, $type, $newNameFile, $quality = QUALITY)
         $savePath = DIRSAVE . '/' . $newNameFile . '.gif';
         imagegif($img, $savePath);
     } else {
-        $error = 'Не удалось создать файл';
+        throw new Exception('Не удалось создать файл');
     }
     echo '<img src="' . $savePath . '" alt="">';
 }
@@ -91,5 +90,9 @@ function resize($img)
     return $img;
 }
 
-resizeImg('img/image.jpg', 'image');
-resizeImg('img/image2.png', 'image2');
+try {
+    resizeImg('img/image.jpg', 'image');
+    resizeImg('img/image2.png', 'image2');
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
