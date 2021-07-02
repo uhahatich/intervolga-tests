@@ -14,7 +14,7 @@ function resizeImg($path, $newNameFile)
         throw new Exception('Не подключено расширение exif');
     }
 
-    // get type and create img desc
+    // определение типа
 
     $type = exif_imagetype($path);
 
@@ -33,7 +33,7 @@ function resizeImg($path, $newNameFile)
 
     $img = resize($img);
 
-    // save file 
+    // сохранение в папку res-images
     save($img, $type, $newNameFile);
 }
 
@@ -61,7 +61,7 @@ function save($img, $type, $newNameFile, $quality = QUALITY)
 
 function resize($img)
 {
-    // first resize
+    // первый ресайз
 
     $width = imagesx($img);
     $height = imagesy($img);
@@ -81,7 +81,7 @@ function resize($img)
 
     imagecopyresampled($imgSubstrate, $img, 0, 0, 0, 0, $arr['w'], $arr['h'], $width, $height);
 
-    // second resize
+    // второй ресайз
 
     $sx = ($arr['w'] / 2) - (WIDTH / 2);
     $sy = ($arr['h'] / 2) - (HEIGHT / 2);

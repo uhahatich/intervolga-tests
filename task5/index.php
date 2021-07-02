@@ -21,7 +21,7 @@
             </form>
         </div>
         <div class="col-md-7 bg-white rounded py-3 shadow">
-            <table class="table  table-bordered table-light table-striped table-hover">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">id</th>

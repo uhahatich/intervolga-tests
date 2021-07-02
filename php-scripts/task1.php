@@ -11,7 +11,7 @@ function get_short_article($path, $startTag)
     // определение последних двух слов превью
     $lastWordsPos =  mb_strrpos($a, ' ', -8) + 1;
     $lastWords = mb_substr($a, $lastWordsPos);
-    //
+
     $a = mb_substr($a, 0, mb_strlen($a) - (180 - $lastWordsPos));
 
     $nLink = '<a href="' .  $path . '">' . $lastWords . '...' . '</a>';
